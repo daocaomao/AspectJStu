@@ -1,0 +1,6 @@
+include ':collection'
+include ':data_collection'
+include ':rename'
+include ':HelloPLugin'
+include ':app'
+rootProject.name = "AspectJStu"

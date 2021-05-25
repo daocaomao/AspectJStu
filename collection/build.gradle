@@ -1,0 +1,45 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+    id 'maven-publish'
+}
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation "org.aspectj:aspectjtools:1.9.0"
+    implementation "org.aspectj:aspectjrt:1.9.0"
+}
+
+gradlePlugin {
+    // Define the plugin
+    plugins {
+        collection {
+            id = 'com.zhangxf.plugin.collection'
+            implementationClass = 'com.zhangxf.plugin.CollectionPlugin'
+        }
+    }
+}
+
+publishing {
+    publications {
+        // 这里的 hello 可以任意命名
+        collection(MavenPublication) {
+            // 插件的组ID，建议设置为插件的包名
+            groupId = 'com.zhangxf.plugin'
+            // 翻译过来是 工件ID，我的理解是插件的名字
+            artifactId = 'collection'
+            version = '0.0.1'
+            // 组件类型，我们的插件其实就是Java组件
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            // $rootProject 表示你项目的根目录
+            url = "$rootDir/repo"
+        }
+    }
+}
