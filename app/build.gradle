@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 //    id 'com.zhangxf.plugin.hello'
 //    id 'com.zhangxf.plugin.rename'
-    id 'com.zhangxf.plugin.collection'
+//    id 'com.zhangxf.plugin.collection'
 }
 
 android {
