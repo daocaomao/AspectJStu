@@ -23,4 +23,15 @@ public class ViewOnClickListenerAspectj {
         View view = (View) joinPoint.getArgs()[0];
         DataPrivate.trackViewOnClick(view);
     }
+
+    /**
+     * 支持 @onClickView 注解
+     *
+     * @param joinPoint JoinPoint
+     */
+    @After("execution(@com.zhangxf.plugin.onClickView * *(android.view.View))")
+    public void onTrackViewOnClickAOP(final JoinPoint joinPoint) {
+        View view = (View) joinPoint.getArgs()[0];
+        DataPrivate.trackViewOnClick(view);
+    }
 }
