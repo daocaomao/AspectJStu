@@ -12,29 +12,29 @@ import java.util.Map;
  * @Author: zhangxf
  * @CreateDate: 2021/5/21 14:50
  */
-public class SensorsDataApi {
-    private static final String TAG = SensorsDataApi.class.getSimpleName();
+public class AnalyticsDataApi {
+    private static final String TAG = AnalyticsDataApi.class.getSimpleName();
     private static final Object mLock = new Object();
-    private static SensorsDataApi instance;
+    private static AnalyticsDataApi instance;
     public static String SDK_VERSION = "1.0.0";
     private static String mDeviceId;
     private static Map<String, Object> mDeviceInfo;
 
-    private SensorsDataApi(Application application) {
-        mDeviceId = SensorsDataPrivate.getAndroidID(application.getApplicationContext());
-        mDeviceInfo = SensorsDataPrivate.getDeviceInfo(application.getApplicationContext());
+    private AnalyticsDataApi(Application application) {
+        mDeviceId = DataPrivate.getAndroidID(application.getApplicationContext());
+        mDeviceInfo = DataPrivate.getDeviceInfo(application.getApplicationContext());
     }
 
-    public static SensorsDataApi init(Application application) {
+    public static AnalyticsDataApi init(Application application) {
         synchronized (mLock) {
             if (instance == null) {
-                instance = new SensorsDataApi(application);
+                instance = new AnalyticsDataApi(application);
             }
         }
         return instance;
     }
 
-    public static SensorsDataApi getInstance() {
+    public static AnalyticsDataApi getInstance() {
         return instance;
     }
 
@@ -48,13 +48,13 @@ public class SensorsDataApi {
             JSONObject sendProperties = new JSONObject(mDeviceInfo);
 
             if (properties != null) {
-                SensorsDataPrivate.mergeJSONObject(properties, sendProperties);
+                DataPrivate.mergeJSONObject(properties, sendProperties);
             }
 
             jsonObject.put("properties", sendProperties);
             jsonObject.put("time", System.currentTimeMillis());
 
-            Log.i(TAG, SensorsDataPrivate.formatJson(jsonObject.toString()));
+            Log.i(TAG, DataPrivate.formatJson(jsonObject.toString()));
         } catch (Exception e) {
             e.printStackTrace();
         }

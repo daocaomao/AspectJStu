@@ -28,8 +28,11 @@ repositories {
 gradlePlugin {
     // Define the plugin
     plugins {
+        // 声明插件信息，这里的 hello 名字随意
         hello {
+            // 插件ID
             id = 'com.zhangxf.plugin.hello'
+            // 插件的实现类
             implementationClass = 'com.zhangxf.plugin.HelloPlugin'
         }
     }

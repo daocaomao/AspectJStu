@@ -21,6 +21,6 @@ public class ViewOnClickListenerAspectj {
     @After("execution(* android.view.View.OnClickListener.onClick(android.view.View))")
     public void onViewClickAOP(final JoinPoint joinPoint) {
         View view = (View) joinPoint.getArgs()[0];
-        SensorsDataPrivate.trackViewOnClick(view);
+        DataPrivate.trackViewOnClick(view);
     }
 }

@@ -2,7 +2,7 @@ package com.zxf.empty.aspectjstu;
 
 import android.app.Application;
 
-import com.zhangxf.plugin.SensorsDataApi;
+import com.zhangxf.plugin.AnalyticsDataApi;
 
 /**
  * @Description:
@@ -14,6 +14,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SensorsDataApi.init(this);
+        AnalyticsDataApi.init(this);
     }
 }

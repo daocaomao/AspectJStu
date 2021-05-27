@@ -57,7 +57,7 @@ import java.util.Map;
  * @Author: zhangxf
  * @CreateDate: 2021/5/21 14:56
  */
-public class SensorsDataPrivate {
+public class DataPrivate {
     private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"
             + ".SSS", Locale.CHINA);
 
@@ -90,7 +90,7 @@ public class SensorsDataPrivate {
 
             Context context = dialog.getContext();
             //将Context转成Activity
-            Activity activity = SensorsDataPrivate.getActivityFromContext(context);
+            Activity activity = DataPrivate.getActivityFromContext(context);
 
             if (activity == null) {
                 activity = dialog.getOwnerActivity();
@@ -115,7 +115,7 @@ public class SensorsDataPrivate {
 
             properties.put("$element_type", "Dialog");
 
-            SensorsDataApi.getInstance().track("$AppClick", properties);
+            AnalyticsDataApi.getInstance().track("$AppClick", properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,7 +134,7 @@ public class SensorsDataPrivate {
 
             Context context = dialog.getContext();
             //将Context转成Activity
-            Activity activity = SensorsDataPrivate.getActivityFromContext(context);
+            Activity activity = DataPrivate.getActivityFromContext(context);
 
             if (activity == null) {
                 activity = dialog.getOwnerActivity();
@@ -166,7 +166,7 @@ public class SensorsDataPrivate {
             properties.put("isChecked", isChecked);
             properties.put("$element_type", "Dialog");
 
-            SensorsDataApi.getInstance().track("$AppClick", properties);
+            AnalyticsDataApi.getInstance().track("$AppClick", properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -181,7 +181,7 @@ public class SensorsDataPrivate {
 
             JSONObject properties = new JSONObject();
 
-            Activity activity = SensorsDataPrivate.getActivityFromContext(context);
+            Activity activity = DataPrivate.getActivityFromContext(context);
 
             try {
                 String idString = context.getResources().getResourceEntryName(view.getId());
@@ -243,7 +243,7 @@ public class SensorsDataPrivate {
 
             properties.put("isChecked", isChecked);
 
-            SensorsDataApi.getInstance().track("$AppClick", properties);
+            AnalyticsDataApi.getInstance().track("$AppClick", properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -259,7 +259,7 @@ public class SensorsDataPrivate {
             }
 
             JSONObject properties = new JSONObject();
-            Activity activity = SensorsDataPrivate.getActivityFromContext(context);
+            Activity activity = DataPrivate.getActivityFromContext(context);
             if (activity != null) {
                 properties.put("$activity", activity.getClass().getCanonicalName());
             }
@@ -270,7 +270,7 @@ public class SensorsDataPrivate {
                 properties.put("$element_position", String.format(Locale.CHINA, "%d", groupPosition));
             }
 
-            String idString = SensorsDataPrivate.getViewId(expandableListView);
+            String idString = DataPrivate.getViewId(expandableListView);
             if (!TextUtils.isEmpty(idString)) {
                 properties.put("$element_id", idString);
             }
@@ -281,7 +281,7 @@ public class SensorsDataPrivate {
             if (view instanceof ViewGroup) {
                 try {
                     StringBuilder stringBuilder = new StringBuilder();
-                    viewText = SensorsDataPrivate.traverseViewContent(stringBuilder, (ViewGroup) view);
+                    viewText = DataPrivate.traverseViewContent(stringBuilder, (ViewGroup) view);
                     if (!TextUtils.isEmpty(viewText)) {
                         viewText = viewText.substring(0, viewText.length() - 1);
                     }
@@ -294,7 +294,7 @@ public class SensorsDataPrivate {
                 properties.put("$element_content", viewText);
             }
 
-            SensorsDataApi.getInstance().track("$AppClick", properties);
+            AnalyticsDataApi.getInstance().track("$AppClick", properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -310,8 +310,8 @@ public class SensorsDataPrivate {
 
             JSONObject properties = new JSONObject();
 
-            Activity activity = SensorsDataPrivate.getActivityFromContext(context);
-            String idString = SensorsDataPrivate.getViewId(adapterView);
+            Activity activity = DataPrivate.getActivityFromContext(context);
+            String idString = DataPrivate.getViewId(adapterView);
             if (!TextUtils.isEmpty(idString)) {
                 properties.put("$element_id", idString);
             }
@@ -340,7 +340,7 @@ public class SensorsDataPrivate {
                 if (view instanceof ViewGroup) {
                     try {
                         StringBuilder stringBuilder = new StringBuilder();
-                        viewText = SensorsDataPrivate.traverseViewContent(stringBuilder, (ViewGroup) view);
+                        viewText = DataPrivate.traverseViewContent(stringBuilder, (ViewGroup) view);
                         if (!TextUtils.isEmpty(viewText)) {
                             viewText = viewText.substring(0, viewText.length() - 1);
                         }
@@ -348,14 +348,14 @@ public class SensorsDataPrivate {
                         e.printStackTrace();
                     }
                 } else {
-                    viewText = SensorsDataPrivate.getElementContent(view);
+                    viewText = DataPrivate.getElementContent(view);
                 }
                 //$element_content
                 if (!TextUtils.isEmpty(viewText)) {
                     properties.put("$element_content", viewText);
                 }
             }
-            SensorsDataApi.getInstance().track("$AppClick", properties);
+            AnalyticsDataApi.getInstance().track("$AppClick", properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -390,13 +390,13 @@ public class SensorsDataPrivate {
                     jsonObject.put("$element_id", idString);
                 }
 
-                Activity activity = SensorsDataPrivate.getActivityFromContext(context);
+                Activity activity = DataPrivate.getActivityFromContext(context);
                 if (activity != null) {
                     jsonObject.put("$activity", activity.getClass().getCanonicalName());
                 }
             }
 
-            SensorsDataApi.getInstance().track("$AppClick", jsonObject);
+            AnalyticsDataApi.getInstance().track("$AppClick", jsonObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -415,14 +415,14 @@ public class SensorsDataPrivate {
             }
 
             JSONObject properties = new JSONObject();
-            properties.put("$element_type", SensorsDataPrivate.getElementType(view));
-            properties.put("$element_id", SensorsDataPrivate.getViewId(view));
-            properties.put("$element_content", SensorsDataPrivate.getElementContent(view));
+            properties.put("$element_type", DataPrivate.getElementType(view));
+            properties.put("$element_id", DataPrivate.getViewId(view));
+            properties.put("$element_content", DataPrivate.getElementContent(view));
 
-            Activity activity = SensorsDataPrivate.getActivityFromView(view);
+            Activity activity = DataPrivate.getActivityFromView(view);
             if (activity != null) {
                 properties.put("$activity", activity.getClass().getCanonicalName());
-                properties.put("$activity_title", SensorsDataPrivate.getActivityTitle(activity));
+                properties.put("$activity_title", DataPrivate.getActivityTitle(activity));
             }
 
             try {
@@ -437,7 +437,7 @@ public class SensorsDataPrivate {
                 e.printStackTrace();
             }
 
-            SensorsDataApi.getInstance().track("$AppClick", properties);
+            AnalyticsDataApi.getInstance().track("$AppClick", properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -447,7 +447,7 @@ public class SensorsDataPrivate {
         final Map<String, Object> deviceInfo = new HashMap<>();
         {
             deviceInfo.put("$lib", "Android");
-            deviceInfo.put("$lib_version", SensorsDataApi.SDK_VERSION);
+            deviceInfo.put("$lib_version", AnalyticsDataApi.SDK_VERSION);
             deviceInfo.put("$os", "Android");
             deviceInfo.put("$os_version",
                     Build.VERSION.RELEASE == null ? "UNKNOWN" : Build.VERSION.RELEASE);
@@ -617,7 +617,7 @@ public class SensorsDataPrivate {
 
             properties.put("$element_type", "TabHost");
             properties.put("$element_content", tabName);
-            SensorsDataApi.getInstance().track("$AppClick", properties);
+            AnalyticsDataApi.getInstance().track("$AppClick", properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
